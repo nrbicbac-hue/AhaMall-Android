@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">아하몰</string>
+    <string name="network_error">인터넷 연결을 확인해 주세요.</string>
+    <string name="retry">다시 시도</string>
+    <string name="download_started">다운로드를 시작했습니다.</string>
+    <string name="no_app">연결할 앱을 찾을 수 없습니다.</string>
+</resources>
