@@ -1,5 +1,7 @@
 # 아하몰 Aha mall 안드로이드 앱
 
+[아하몰 APK 다운로드](https://github.com/nrbicbac-hue/AhaMall-Android/releases/download/v1.0.0/AhaMall-1.0.0.apk)
+
 쇼핑몰 `https://www.imall7.com/me2`를 안드로이드 앱으로 이용할 수 있도록 만든 WebView 기반 프로젝트입니다.
 
 ## 포함 기능
@@ -16,12 +18,11 @@
 
 ## 가장 쉬운 APK 만들기
 
-1. 이 폴더 전체를 GitHub 저장소에 올립니다.
-2. GitHub의 **Actions** 탭에서 `Build Aha Mall APK`를 실행합니다.
-3. 완료 후 `AhaMall-APK`를 내려받아 압축을 풀면 `AhaMall-1.0.0.apk`가 나옵니다.
-4. 이 APK를 휴대폰이나 다운로드 페이지에서 배포할 수 있습니다.
+1. GitHub의 **Actions** 탭에서 `Build Aha Mall APK` 실행 결과를 확인합니다.
+2. 완료되면 위의 **아하몰 APK 다운로드** 링크에서 설치 파일을 받습니다.
+3. APK를 휴대폰이나 다운로드 페이지에서 배포할 수 있습니다.
 
-태그를 `v1.0.0`처럼 만들어 올리면 GitHub Releases에 APK가 자동 등록됩니다.
+`main` 브랜치가 변경되면 GitHub Releases의 `v1.0.0` APK가 자동으로 갱신됩니다.
 
 ## Android Studio에서 실행
 
