@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Message;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
@@ -60,7 +61,7 @@ public class MainActivity extends android.app.Activity {
         settings.setDatabaseEnabled(true);
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);
-        settings.setSupportMultipleWindows(false);
+        settings.setSupportMultipleWindows(true);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
@@ -191,6 +192,41 @@ public class MainActivity extends android.app.Activity {
         public void onProgressChanged(WebView view, int newProgress) {
             progressBar.setProgress(newProgress);
             progressBar.setVisibility(newProgress >= 100 ? View.GONE : View.VISIBLE);
+        }
+
+        @Override
+        public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture,
+                                      Message resultMsg) {
+            WebView popupView = new WebView(MainActivity.this);
+            popupView.getSettings().setJavaScriptEnabled(true);
+            popupView.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView popup, WebResourceRequest request) {
+                    Uri uri = request.getUrl();
+                    if (!openExternalScheme(uri)) {
+                        MainActivity.this.webView.loadUrl(uri.toString());
+                    }
+                    popup.destroy();
+                    return true;
+                }
+
+                @Override
+                public void onPageStarted(WebView popup, String url, android.graphics.Bitmap favicon) {
+                    if (url != null && !"about:blank".equals(url)) {
+                        Uri uri = Uri.parse(url);
+                        if (!openExternalScheme(uri)) {
+                            MainActivity.this.webView.loadUrl(url);
+                        }
+                        popup.stopLoading();
+                        popup.destroy();
+                    }
+                }
+            });
+
+            WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
+            transport.setWebView(popupView);
+            resultMsg.sendToTarget();
+            return true;
         }
 
         @Override
